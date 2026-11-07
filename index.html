@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File Converter</title>
+<meta name="description" content="Convert images and basic documents locally in your browser.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site-ui.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="converter-page">
+<div id="wrapper">
+  <main id="main">
+    <section class="converter" aria-labelledby="converterTitle">
+      <div class="converter-heading">
+        <h1 id="converterTitle">File Converter</h1>
+        <p>Convert images and basic documents right in your browser.</p>
+      </div>
+
+      <form id="converterForm" class="converter-panel">
+        <input id="fileInput" class="visually-hidden" type="file" accept=".png,.jpg,.jpeg,.webp,.txt,.md,.markdown,.html,.htm">
+        <div id="dropZone" class="drop-zone" role="group" tabindex="0" aria-label="File drop area. Press Enter or Space to browse.">
+          <strong>Drop a file here</strong>
+          <span>or <button id="browseButton" class="text-button" type="button">browse your device</button></span>
+          <small>PNG, JPEG, WebP, TXT, Markdown, or HTML</small>
+        </div>
+
+        <div id="fileDetails" class="file-details hidden" aria-live="polite">
+          <div class="file-copy">
+            <strong id="fileName"></strong>
+            <span id="fileMeta"></span>
+          </div>
+          <button id="removeFileButton" class="secondary-button" type="button">Remove</button>
+        </div>
+
+        <div class="converter-controls">
+          <span id="selectedFileCount" class="file-count" aria-live="polite">No file added</span>
+          <div class="format-control">
+            <label for="outputFormat">Convert to</label>
+            <select id="outputFormat" name="outputFormat" disabled>
+              <option value="" selected disabled>Choose a file first</option>
+            </select>
+          </div>
+          <div id="qualityControl" class="quality-control hidden">
+            <label for="quality">Quality <span id="qualityValue">85%</span></label>
+            <input id="quality" type="range" min="10" max="100" value="85">
+          </div>
+        </div>
+
+        <div class="convert-actions">
+          <button id="convertButton" class="primary-button" type="submit" disabled>Convert <span aria-hidden="true">&rarr;</span></button>
+        </div>
+        <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+
+        <div id="outputDetails" class="output-details hidden">
+          <div class="file-copy">
+            <strong id="outputName"></strong>
+            <span id="outputMeta"></span>
+          </div>
+          <a id="downloadLink" class="download-link" href="#">Download</a>
+        </div>
+      </form>
+
+      <p class="privacy-note">Conversion happens locally in this tab. Files are not uploaded or saved by this site.</p>
+    </section>
+
+  </main>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
